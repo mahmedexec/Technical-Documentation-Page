@@ -1,11 +1,172 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="master.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <title>Technical Documentation</title>
   </head>
   <body>
+    <script type="text/javascript" src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js">
+
+    </script>
+    <nav id="navbar">
+      <header class="logo">
+        Beginner's guide to Dart
+      </header>
+      <a href="#Hello_World" class="nav-link">Hello World</a>
+      <a href="#Variables" class="nav-link">Variables</a>
+      <a href="#Control_flow_statements" class="nav-link">Control flow statements</a>
+      <a href="#Functions" class="nav-link">Functions </a>
+      <a href="#Comments" class="nav-link">Comments</a>
+      <a href="#Imports" class="nav-link">Imports</a>
+      <a href="#Classes" class="nav-link">Classes</a>
+      <a href="#Summary" class="nav-link">Summary</a>
+
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Hello_World">
+        <header>
+          Hello World
+        </header>
+        <p>Every app has a main() function. To display text on the console, you can use the top-level print() function:</p>
+        <code>void main() {<br>
+  print('Hello, World!');<br>
+}</code>
+      </section>
+      <section class="main-section" id="Variables">
+        <header>
+          Variables
+        </header>
+        <p>Even in type-safe Dart code, most variables don’t need explicit types, thanks to type inference:</p>
+        <code>var name = 'Voyager I';<br>
+var year = 1977;<br>
+var antennaDiameter = 3.7;<br>
+var flybyObjects = ['Jupiter', 'Saturn', 'Uranus', 'Neptune'];<br>
+var image = {<br>
+  'tags': ['saturn'],<br>
+  'url': '//path/to/saturn.jpg'<br>
+};<br></code>
+      </section>
+      <section class="main-section" id="Control_flow_statements">
+        <header>
+          Control flow statements
+        </header>
+        <p>Dart supports the usual control flow statements:</p>
+        <code>if (year >= 2001) {<br>
+  print('21st century');<br>
+} else if (year >= 1901) {<br>
+  print('20th century');<br>
+}<br>
+
+for (var object in flybyObjects) {<br>
+  print(object);<br>
+}<br>
+
+for (int month = 1; month <= 12; month++) {<br>
+  print(month);<br>
+}<br>
+
+while (year < 2016) {<br>
+  year += 1;<br>
+}</code>
+      </section>
+      <section class="main-section" id="Functions">
+        <header>
+          Functions
+        </header>
+        <p>We recommend specifying the types of each function’s arguments and return value:</p>
+        <code>
+          int fibonacci(int n) {<br>
+    if (n == 0 || n == 1) return n;<br>
+    return fibonacci(n - 1) + fibonacci(n - 2);<br>
+  }<br>
+
+  var result = fibonacci(20);</code><br>
+  <p>A shorthand => (arrow) syntax is handy for functions that contain a single statement. This syntax is especially useful when passing anonymous functions as arguments:</p>
+      </section>
+      <section class="main-section" id="Comments">
+        <header>
+          Comments
+        </header>
+        <p>Dart comments usually start with //.</p>
+        <code>
+          // This is a normal, one-line comment.<br>
+
+  /// This is a documentation comment, used to document libraries,<br>
+  /// classes, and their members. Tools like IDEs and dartdoc treat <br>
+  /// doc comments specially.<br>
+
+  /* Comments like these are also supported. */</code><br>
+      </section>
+      <section class="main-section" id="Imports">
+        <header>
+          Imports
+        </header>
+        <p>To access APIs defined in other libraries, use import.</p>
+        <code>
+          // Importing core libraries <br>
+  import 'dart:math';<br>
+
+  // Importing libraries from external packages <br>
+  import 'package:test/test.dart'; <br>
+
+  // Importing files <br>
+  import 'path/to/my_other_file.dart'; <br>   </code>
+      </section>
+      <section class="main-section" id="Classes">
+        <header>
+          Classes
+        </header>
+        <p>Here’s an example of a class with three properties, two constructors, and a method. One of the properties can’t be set directly, so it’s defined using a getter method (instead of a variable).</p>
+        <code>class Spacecraft {<br>
+  String name;<br>
+  DateTime launchDate;<br>
+
+  // Constructor, with syntactic sugar for assignment to members.<br>
+  Spacecraft(this.name, this.launchDate) {<br>
+    // Initialization code goes here.<br>
+  }<br>
+
+  // Named constructor that forwards to the default one.<br>
+  Spacecraft.unlaunched(String name) : this(name, null);<br>
+
+  int get launchYear =><br>
+      launchDate?.year; // read-only non-final property <br>
+
+  // Method.  <br>
+  void describe() { <br>
+    print('Spacecraft: $name'); <br>
+    if (launchDate != null) {<br>
+      int years = <br>
+          DateTime.now().difference(launchDate).inDays ~/ <br>
+              365;<br>
+      print('Launched: $launchYear ($years years ago)'); <br>
+    } else {<br>
+      print('Unlaunched');<br>
+    }
+  }
+}</code>
+      </section>
+      <section class="main-section" id="Summary">
+        <header>
+          Summary
+        </header>
+        <p>To summarize, here are some of the most important concepts in Dart.</p>
+      <ul>
+        <li>Everything you can place in a variable is an object, and every object is an instance of a class. Even numbers, functions, and null are objects. All objects inherit from the Object class.</li>
+        <li>Although Dart is strongly typed, type annotations are optional because Dart can infer types. In the code above, number is inferred to be of type int. When you want to explicitly say that no type is expected, use the special type dynamic.</li>
+        <li>Dart supports generic types, like List<int> (a list of integers) or List<dynamic> (a list of objects of any type).</li>
+        <li>Dart supports top-level functions (such as main()), as well as functions tied to a class or object (static and instance methods, respectively). You can also create functions within functions (nested or local functions).</li>
+        <li>Similarly, Dart supports top-level variables, as well as variables tied to a class or object (static and instance variables). Instance variables are sometimes known as fields or properties.</li>
+      </ul>
+      <p>There you have it, this guide should enough to get you started.</p>
+      </section>
+    </main>
 
   </body>
 </html>
